@@ -11,6 +11,9 @@
 |
 */
 use App\Http\Controllers\DatosController;
+//use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -32,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::view('/Content', 'home')->name('content');
     
-    Route::get('/Logout', 'HomeController@logOut');
+    Route::get('/Logout', 'HomeController@Logout');
 
     Route::get('/getUser','UsersController@getUser');
     Route::get('/getUsers', 'UsersController@getUsers');
@@ -74,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/setSubSerie', 'DocumentController@setSubSerie');
     Route::post('/setSubProceedings', 'DocumentController@setSubProceedings');
     Route::post('/setDocumente', 'DocumentController@setDocumente');
-
-   
+    Route::delete('/deleteproceedings/{fileNumber}', 'DocumentController@deleteproceedings');
+    Route::delete('/deletesubproceedings/{subFileNumber}', 'DocumentController@deletesubproceedings');
+    Route::delete('/deletedocument/{name}', 'DocumentController@deletedocument');
 });
